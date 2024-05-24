@@ -69,6 +69,7 @@ radio_req_name(
     RADIO_CALL_1_3(RADIO_REQ_)
     RADIO_CALL_1_4_(RADIO_REQ__)
     RADIO_CALL_1_5_(RADIO_REQ__)
+    RADIO_CALL_1_6(RADIO__REQ__)
 #undef RADIO_REQ_
 #undef RADIO_REQ__
     case RADIO_REQ_START_NETWORK_SCAN_1_2:     return "startNetworkScan_1_2";
@@ -99,6 +100,7 @@ radio_resp_name(
     RADIO_CALL_1_3(RADIO_RESP_)
     RADIO_CALL_1_4_(RADIO_RESP__)
     RADIO_CALL_1_5_(RADIO_RESP__)
+    RADIO_CALL_1_6(RADIO_RESP__)
 #undef RADIO_RESP_
 #undef RADIO_RESP__
     case RADIO_RESP_GET_CELL_INFO_LIST_1_2:
@@ -127,6 +129,8 @@ radio_resp_name(
         return "getCellInfoListResponse_1_5";
     case RADIO_RESP_GET_ICC_CARD_STATUS_1_5:
         return "getIccCardStatus_1_5";
+        case RADIO_RESP_GET_ICC_CARD_STATUS_1_6:
+            return "getIccCardStatus_1_6";
     case RADIO_RESP_ANY:
         break;
     }
@@ -145,6 +149,7 @@ radio_ind_name(
     RADIO_EVENT_1_2(RADIO_IND_)
     RADIO_EVENT_1_4(RADIO_IND_)
     RADIO_EVENT_1_5(RADIO_IND_)
+    RADIO_EVENT_1_6(RADIO_IND_)
 #undef RADIO_IND_
     case RADIO_IND_ANY:
         break;
@@ -178,6 +183,7 @@ radio_req_resp(
     RADIO_CALL_1_3(RADIO_REQ_RESP_)
     RADIO_CALL_1_4_(RADIO_REQ_RESP__)
     RADIO_CALL_1_5_(RADIO_REQ_RESP__)
+    RADIO_CALL_1_6(RADIO_REQ_RESP__)
 #undef RADIO_REQ_RESP_
 #undef RADIO_REQ_RESP__
     case RADIO_REQ_SETUP_DATA_CALL_1_2:
@@ -258,6 +264,8 @@ radio_req_resp2(
             return RADIO_RESP_GET_ICC_CARD_STATUS_1_4;
         case RADIO_INTERFACE_1_5:
             return RADIO_RESP_GET_ICC_CARD_STATUS_1_5;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_ICC_CARD_STATUS_1_6;
         case RADIO_INTERFACE_NONE:
         case RADIO_INTERFACE_COUNT:
             break;
@@ -282,6 +290,8 @@ radio_req_resp2(
             return RADIO_RESP_GET_CELL_INFO_LIST_1_2;
         case RADIO_INTERFACE_1_4:
             return RADIO_RESP_GET_CELL_INFO_LIST_1_4;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_CELL_INFO_LIST_1_6;
         default:
             return RADIO_RESP_GET_CELL_INFO_LIST_1_5;
         case RADIO_INTERFACE_NONE:
@@ -300,6 +310,8 @@ radio_req_resp2(
         case RADIO_INTERFACE_1_0:
         case RADIO_INTERFACE_1_1:
             return RADIO_RESP_GET_CURRENT_CALLS;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_CURRENT_CALLS_1_6;
         default: /* The last one */
             return RADIO_RESP_GET_CURRENT_CALLS_1_2;
         case RADIO_INTERFACE_NONE:
@@ -318,6 +330,8 @@ radio_req_resp2(
         case RADIO_INTERFACE_1_0:
         case RADIO_INTERFACE_1_1:
             return RADIO_RESP_GET_SIGNAL_STRENGTH;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_SIGNAL_STRENGTH_1_6;
         default: /* The last one */
             return RADIO_RESP_GET_SIGNAL_STRENGTH_1_2;
         case RADIO_INTERFACE_NONE:
@@ -336,6 +350,8 @@ radio_req_resp2(
         case RADIO_INTERFACE_1_0:
         case RADIO_INTERFACE_1_1:
             return RADIO_RESP_GET_VOICE_REGISTRATION_STATE;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_6;s
         default: /* The last one */
             return RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_2;
         case RADIO_INTERFACE_NONE:
@@ -358,6 +374,8 @@ radio_req_resp2(
         case RADIO_INTERFACE_1_2:
         case RADIO_INTERFACE_1_3:
             return RADIO_RESP_GET_DATA_REGISTRATION_STATE_1_2;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_DATA_REGISTRATION_STATE_1_6;
         default: /* The last one */
             return RADIO_RESP_GET_DATA_REGISTRATION_STATE_1_4;
         case RADIO_INTERFACE_NONE:
@@ -381,6 +399,8 @@ radio_req_resp2(
             return RADIO_RESP_GET_DATA_CALL_LIST;
         case RADIO_INTERFACE_1_4:
             return RADIO_RESP_GET_DATA_CALL_LIST_1_4;
+            case RADIO_INTERFACE_1_6:
+                return RADIO_RESP_GET_DATA_CALL_LIST_1_6;
         default: /* The last one */
             return RADIO_RESP_GET_DATA_CALL_LIST_1_5;
         case RADIO_INTERFACE_NONE:

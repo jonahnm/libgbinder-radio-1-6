@@ -63,6 +63,7 @@ typedef enum radio_interface {
     RADIO_INTERFACE_1_3,
     RADIO_INTERFACE_1_4,
     RADIO_INTERFACE_1_5, /* Since 1.5.0 */
+    RADIO_INTERFACE_1_6,
     RADIO_INTERFACE_COUNT
 } RADIO_INTERFACE; /* Since 1.2.0 */
 
@@ -82,25 +83,28 @@ typedef enum radio_observer_priority {
 #define RADIO_IFACE_1_3(x)     RADIO_IFACE_PREFIX "1.3::" x
 #define RADIO_IFACE_1_4(x)     RADIO_IFACE_PREFIX "1.4::" x
 #define RADIO_IFACE_1_5(x)     RADIO_IFACE_PREFIX "1.5::" x
+#define RADIO_IFACE_1_6(x)     RADIO_IFACE_PREFIX "1.6::" x
 #define RADIO_1_0              RADIO_IFACE_1_0(RADIO_IFACE)
 #define RADIO_1_1              RADIO_IFACE_1_1(RADIO_IFACE)
 #define RADIO_1_2              RADIO_IFACE_1_2(RADIO_IFACE)
 #define RADIO_1_3              RADIO_IFACE_1_3(RADIO_IFACE)
 #define RADIO_1_4              RADIO_IFACE_1_4(RADIO_IFACE)
 #define RADIO_1_5              RADIO_IFACE_1_5(RADIO_IFACE)
+#define RADIO_1_6              RADIO_IFACE_1_6(RADIO_IFACE)
 #define RADIO_RESPONSE_1_0     RADIO_IFACE_1_0(RADIO_RESPONSE_IFACE)
 #define RADIO_RESPONSE_1_1     RADIO_IFACE_1_1(RADIO_RESPONSE_IFACE)
 #define RADIO_RESPONSE_1_2     RADIO_IFACE_1_2(RADIO_RESPONSE_IFACE)
 #define RADIO_RESPONSE_1_3     RADIO_IFACE_1_3(RADIO_RESPONSE_IFACE)
 #define RADIO_RESPONSE_1_4     RADIO_IFACE_1_4(RADIO_RESPONSE_IFACE)
 #define RADIO_RESPONSE_1_5     RADIO_IFACE_1_5(RADIO_RESPONSE_IFACE)
+#define RADIO_RESPONSE_1_6     RADIO_IFACE_1_6(RADIO_RESPONSE_IFACE)
 #define RADIO_INDICATION_1_0   RADIO_IFACE_1_0(RADIO_INDICATION_IFACE)
 #define RADIO_INDICATION_1_1   RADIO_IFACE_1_1(RADIO_INDICATION_IFACE)
 #define RADIO_INDICATION_1_2   RADIO_IFACE_1_2(RADIO_INDICATION_IFACE)
 #define RADIO_INDICATION_1_3   RADIO_IFACE_1_3(RADIO_INDICATION_IFACE)
 #define RADIO_INDICATION_1_4   RADIO_IFACE_1_4(RADIO_INDICATION_IFACE)
 #define RADIO_INDICATION_1_5   RADIO_IFACE_1_5(RADIO_INDICATION_IFACE)
-
+#define RADIO_INDICATION_1_6   RADIO_IFACE_1_6(RADIO_INDICATION_IFACE)
 /* Types defined in types.hal */
 
 #define RADIO_ALIGNED(x) __attribute__ ((aligned(x)))
@@ -1356,7 +1360,7 @@ typedef struct radio_card_status_1_5 {
     GBinderHidlVec applications RADIO_ALIGNED(8);
 } RADIO_ALIGNED(8) RadioCardStatus_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioCardStatus_1_5) == 112);
-
+typedef struct radio_card_status_1_5 radio_card_status_1_6;
 typedef struct radio_app_status {
     RADIO_APP_TYPE appType RADIO_ALIGNED(4);
     RADIO_APP_STATE appState RADIO_ALIGNED(4);
@@ -1374,7 +1378,7 @@ typedef struct radio_app_status_1_5 {
     RADIO_PERSO_SUBSTATE persoSubstate RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioAppStatus_1_5; /* Since 1.5.5 */
 G_STATIC_ASSERT(sizeof(RadioAppStatus_1_5) == 72);
-
+typedef struct radio_app_status_1_5 radio_app_status_1_6;
 typedef struct radio_uus_info {
     gint32 uusType RADIO_ALIGNED(4);
     gint32 uusDcs RADIO_ALIGNED(4);
@@ -1489,7 +1493,6 @@ typedef struct radio_data_profile_1_5 {
     guint8 persistent RADIO_ALIGNED(1);
 } RADIO_ALIGNED(8) RadioDataProfile_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioDataProfile_1_5) == 112);
-
 typedef struct radio_data_call {
     RADIO_DATA_CALL_FAIL_CAUSE status RADIO_ALIGNED(4);
     gint32 suggestedRetryTime RADIO_ALIGNED(4);
@@ -1519,7 +1522,6 @@ typedef struct radio_data_call_1_4 {
     gint32 mtu RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioDataCall_1_4; /* Since 1.2.5 */
 G_STATIC_ASSERT(sizeof(RadioDataCall_1_4) == 112);
-
 typedef struct radio_link_address {
     GBinderHidlString address RADIO_ALIGNED(8);
     gint32 properties RADIO_ALIGNED(4);
@@ -1543,7 +1545,7 @@ typedef struct radio_data_call_1_5 {
     gint32 mtuV6 RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioDataCall_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioDataCall_1_5) == 112);
-
+typedef struct radio_data_call_1_5 RadioDataCall_1_6;
 typedef struct radio_sms_write_args {
     gint32 status RADIO_ALIGNED(4);
     GBinderHidlString pdu RADIO_ALIGNED(8);
@@ -1672,7 +1674,6 @@ typedef struct radio_cell_info_1_2 {
     RADIO_CELL_CONNECTION_STATUS connectionStatus RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioCellInfo_1_2; /* Since 1.2.0 */
 G_STATIC_ASSERT(sizeof(RadioCellInfo_1_2) == 112);
-
 typedef struct radio_cell_identity_operator_names {
     GBinderHidlString alphaLong RADIO_ALIGNED(8);
     GBinderHidlString alphaShort RADIO_ALIGNED(8);
@@ -1971,7 +1972,10 @@ typedef struct radio_signal_strength_lte {
     guint32 timingAdvance RADIO_ALIGNED(4);
 } RADIO_ALIGNED(4) RadioSignalStrengthLte;
 G_STATIC_ASSERT(sizeof(RadioSignalStrengthLte) == 24);
-
+typedef struct radio_signal_strength_lte_1_6 {
+    RadioSignalStrengthLte base RADIO_ALIGNED(4);
+    guint32 cqiTableInd RADIO_ALIGNED(4);
+} RADIO_ALIGNED(4) RadioSignalStrengthLte_1_6;
 typedef struct radio_signal_strength_tdscdma {
     guint32 rscp RADIO_ALIGNED(4);
 } RADIO_ALIGNED(4) RadioSignalStrengthTdScdma;
@@ -2012,7 +2016,11 @@ typedef struct radio_signal_strength_nr {
     gint32 csiSinr RADIO_ALIGNED(4);
 } RADIO_ALIGNED(4) RadioSignalStrengthNr; /* Since 1.2.5 */
 G_STATIC_ASSERT(sizeof(RadioSignalStrengthNr) == 24);
-
+typedef struct radio_signal_strength_nr_1_6 {
+    RadioSignalStrengthNr base RADIO_ALIGNED(4);
+    guint32 csiCqiIndex RADIO_ALIGNED(4);
+    GBinderHidlVec csiCqiRep RADIO_ALIGNED(8);
+} RADIO_ALIGNED(4) RadioSignalStrengthNr_1_6;
 typedef struct radio_signal_strength_1_4 {
     RadioSignalStrengthGsm gsm RADIO_ALIGNED(4);
     RadioSignalStrengthCdma cdma RADIO_ALIGNED(4);
@@ -2023,7 +2031,15 @@ typedef struct radio_signal_strength_1_4 {
     RadioSignalStrengthNr nr RADIO_ALIGNED(4);
 } RADIO_ALIGNED(4) RadioSignalStrength_1_4; /* Since 1.2.5 */
 G_STATIC_ASSERT(sizeof(RadioSignalStrength_1_4) == 108);
-
+typedef struct radio_signal_strength_1_6 {
+    RadioSignalStrengthGsm gsm RADIO_ALIGNED(4);
+    RadioSignalStrengthCdma cdma RADIO_ALIGNED(4);
+    RadioSignalStrengthEvdo evdo RADIO_ALIGNED(4);
+    RadioSignalStrengthLte_1_6 lte RADIO_ALIGNED(4);
+    RadioSignalStrengthTdScdma_1_2 tdscdma RADIO_ALIGNED(4);
+    RadioSignalStrengthWcdma_1_2 wcdma RADIO_ALIGNED(4);
+    RadioSignalStrengthNr_1_6 nr RADIO_ALIGNED(4);
+} RADIO_ALIGNED(4) RadioSignalStrength_1_6; /* Since 1.2.5 */
 typedef struct radio_cell_info_gsm {
     RadioCellIdentityGsm cellIdentityGsm RADIO_ALIGNED(8);
     RadioSignalStrengthGsm signalStrengthGsm RADIO_ALIGNED(4);
@@ -2085,7 +2101,6 @@ typedef struct radio_cell_info_lte_1_4 {
     guint8 isEndcAvailable RADIO_ALIGNED(1);
 } RADIO_ALIGNED(8) RadioCellInfoLte_1_4; /* Since 1.2.5 */
 G_STATIC_ASSERT(sizeof(RadioCellInfoLte_1_4) == 120);
-
 typedef struct radio_cell_info_tdscdma_1_2 {
     RadioCellIdentityTdscdma_1_2 cellIdentityTdscdma RADIO_ALIGNED(8);
     RadioSignalStrengthTdScdma_1_2 signalStrengthTdscdma RADIO_ALIGNED(4);
@@ -2097,7 +2112,6 @@ typedef struct radio_cell_info_nr {
     RadioCellIdentityNr cellIdentity RADIO_ALIGNED(8);
 } RADIO_ALIGNED(8) RadioCellInfoNr; /* Since 1.2.5 */
 G_STATIC_ASSERT(sizeof(RadioCellInfoNr) == 112);
-
 typedef struct radio_cell_info_1_4 {
     guint8 registered RADIO_ALIGNED(1);
     RADIO_CELL_CONNECTION_STATUS connectionStatus RADIO_ALIGNED(4);
@@ -2130,7 +2144,10 @@ typedef struct radio_cell_info_lte_1_5 {
     RadioSignalStrengthLte signalStrengthLte RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioCellInfoLte_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioCellInfoLte_1_5) == 184);
-
+typedef struct radio_cell_info_lte_1_6 {
+    RadioCellIdentityLte_1_5 cellIdentityLte RADIO_ALIGNED(8);
+    RadioSignalStrengthLte_1_6 signalStrengthLte RADIO_ALIGNED(4);
+} RADIO_ALIGNED(8) RadioCellInfoLte_1_6; /* Since 1.5.0 */
 typedef struct radio_cell_info_tdscdma_1_5 {
     RadioCellIdentityTdscdma_1_5 cellIdentityTdscdma RADIO_ALIGNED(8);
     RadioSignalStrengthTdScdma_1_2 signalStrengthTdscdma RADIO_ALIGNED(4);
@@ -2142,7 +2159,10 @@ typedef struct radio_cell_info_nr_1_5 {
     RadioSignalStrengthNr signalStrengthNr RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioCellInfoNr_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioCellInfoNr_1_5) == 144);
-
+typedef struct radio_cell_info_nr_1_6 {
+    RadioCellIdentityNr_1_5 cellIdentityNr RADIO_ALIGNED(8);
+    RadioSignalStrengthNr_1_6 signalStrengthNr RADIO_ALIGNED(4);
+} RADIO_ALIGNED(8) RadioCellInfoNr_1_6; /* Since 1.5.0 */
 typedef struct radio_cell_info_1_5 {
     guint8 registered RADIO_ALIGNED(1);
     gint32 timeStampType RADIO_ALIGNED(4);
@@ -2159,7 +2179,21 @@ typedef struct radio_cell_info_1_5 {
     } info RADIO_ALIGNED(8);
 } RADIO_ALIGNED(8) RadioCellInfo_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioCellInfo_1_5) == 216);
-
+typedef struct radio_cell_info_1_6 {
+    guint8 registered RADIO_ALIGNED(1);
+    gint32 timeStampType RADIO_ALIGNED(4);
+    guint64 timeStamp RADIO_ALIGNED(8);
+    RADIO_CELL_CONNECTION_STATUS connectionStatus RADIO_ALIGNED(4);
+    guint8 cellInfoType RADIO_ALIGNED(8); /* RADIO_CELL_INFO_TYPE_1_5 */
+    union {
+        RadioCellInfoGsm_1_5 gsm RADIO_ALIGNED(8);
+        RadioCellInfoWcdma_1_5 wcdma RADIO_ALIGNED(8);
+        RadioCellInfoTdscdma_1_5 tdscdma RADIO_ALIGNED(8);
+        RadioCellInfoLte_1_6 lte RADIO_ALIGNED(8);
+        RadioCellInfoNr_1_6 nr RADIO_ALIGNED(8);
+        RadioCellInfoCdma_1_2 cdma RADIO_ALIGNED(8);
+    } info RADIO_ALIGNED(8);
+} RADIO_ALIGNED(8) RadioCellInfo_1_6; /* Since 1.5.0 */
 typedef struct radio_physical_channel_config {
     RADIO_CELL_CONNECTION_STATUS connectionStatus RADIO_ALIGNED(4);
     gint32 cellBandwidthDownlink RADIO_ALIGNED(4);
@@ -2498,8 +2532,36 @@ G_STATIC_ASSERT(sizeof(RadioNetworkScanRequest_1_5) == 56);
     c(170,175,setNetworkSelectionModeManual,SET_NETWORK_SELECTION_MODE_MANUAL,_1_5) \
     c(171,176,sendCdmaSmsExpectMore,SEND_CDMA_SMS_EXPECT_MORE,) \
     c(172,177,supplySimDepersonalization,SUPPLY_SIM_PERSONALIZATION,)
-
-/* e(code,eventName,EVENT_NAME) */
+#define RADIO_CALL_1_6(c) \
+    c(173,179,setRadioPower,SET_RADIO_POWER,_1_6) \
+    c(174,180,getDataCallList,GET_DATA_CALL_LIST,_1_6) \
+    c(175,181,setupDataCall,SETUP_DATA_CALL,_1_6) \
+    c(176,182,sendSms,SEND_SMS,_1_6) \
+    c(177,183,sendSmsExpectMore,SEND_SMS_EXPECT_MORE,_1_6) \
+    c(178,184,sendCdmaSms,SEND_CDMA_SMS,_1_6) \
+    c(179,185,sendCdmaSmsExpectMore,SEND_CDMA_SMS_EXPECT_MORE,_1_6) \
+    c(180,186,setSimCardPower,SET_SIM_CARD_POWER,_1_6) \
+    c(181,187,setNrDualConnectivityState,SET_NR_DUAL_CONNECTIVITY_STATE,) \
+    c(182,188,isNrDualConnectivityEnabled,IS_NR_DUAL_CONNECTIVITY_ENABLED,) \
+    c(183,189,allocatePduSessionId,ALLOCATE_PDU_SESSION_ID,) \
+    c(184,190,releasePduSessionId,RELEASE_PDU_SESSION_ID,) \
+    c(185,191,startHandover,START_HANDOVER,) \
+    c(186,192,cancelHandover,CANCEL_HANDOVER,) \
+    c(187,193,setAllowedNetworkTypesBitmap,SET_ALLOWED_NETWORK_TYPES_BITMAP,) \
+    c(188,194,getAllowedNetworkTypesBitmap,GET_ALLOWED_NETWORK_TYPES_BITMAP,) \
+    c(189,195,setDataThrottling,SET_DATA_THROTTLING,) \
+    c(190,196,emergencyDial,EMERGENCY_DIAL,_1_6) \
+    c(191,197,getSystemSelectionChannels,GET_SYSTEM_SELECTION_CHANNELS,) \
+    c(192,198,getCellInfoList,GET_CELL_INFO_LIST,_1_6) \
+    c(193,199,getVoiceRegistrationState,GET_VOICE_REGISTRATION_STATE,_1_6) \
+    c(194,200,getSignalStrength,GET_SIGNAL_STRENGTH,_1_6) \
+    c(195,201,getDataRegistrationState,GET_DATA_REGISTRATION_STATE,_1_6) \
+    c(196,202,getCurrentCalls,GET_CURRENT_CALLS,_1_6) \
+    c(197,203,getSlicingConfig,GET_SLICING_CONFIG,) \
+    c(198,204,setCarrierInfoForImsiEncryption,SET_CARRIER_INFO_FOR_IMSI_ENCRYPTION,_1_6) \
+    c(199,205,getSimPhonebookRecords,GET_SIM_PHONEBOOK_RECORDS,) \
+    c(200,206,getSimPhonebookCapacity,GET_SIM_PHONEBOOK_CAPACITY,) \
+    c(201,207,updateSimPhonebookRecords,UPDATE_SIM_PHONEBOOK_RECORDS,)
 #define RADIO_EVENT_1_0(e) \
     e(1,radioStateChanged,RADIO_STATE_CHANGED) \
     e(2,callStateChanged,CALL_STATE_CHANGED) \
@@ -2574,7 +2636,15 @@ G_STATIC_ASSERT(sizeof(RadioNetworkScanRequest_1_5) == 56);
     e(63,cellInfoList_1_5,CELL_INFO_LIST_1_5) \
     e(64,networkScanResult_1_5,NETWORK_SCAN_RESULT_1_5) \
     e(65,dataCallListChanged_1_5,DATA_CALL_LIST_CHANGED_1_5)
-
+#define RADIO_EVENT_1_6(e) \
+    e(66,dataCallListChanged_1_6,DATA_CALL_LIST_CHANGED_1_6) \
+    e(67,unthrottleApn,UNTHROTTLE_APN) \
+    e(68,currentSignalStrength_1_6,CURRENT_SIGNAL_STRENGTH_1_6) \
+    e(69,cellInfoList_1_6,CELL_INFO_LIST_1_6) \
+    e(70,networkScanResult_1_6,NETWORK_SCAN_RESULT_1_6) \
+    e(71,currentPhysicalChannelConfigs_1_6,CURRENT_PHYSICAL_CHANNEL_CONFIGS_1_6) \
+    e(72,simPhonebookChanged,SIM_PHONEBOOK_CHANGED) \
+    e(73,simPhonebookRecordsReceived,SIM_PHONEBOOK_RECORDS_RECIEVED)
 typedef enum radio_req {
     RADIO_REQ_ANY = 0,
     RADIO_REQ_NONE = 0,
@@ -2611,7 +2681,10 @@ typedef enum radio_req {
 
     /* android.hardware.radio@1.5::IRadio */
     RADIO_CALL_1_5_(RADIO_REQ__) /* Since 1.5.0 */
-    RADIO_1_5_REQ_LAST = RADIO_REQ_SUPPLY_SIM_PERSONALIZATION
+    RADIO_1_5_REQ_LAST = RADIO_REQ_SUPPLY_SIM_PERSONALIZATION,
+
+    RADIO_CALL_1_6(RADIO_REQ__)
+    RADIO_1_6_REQ_LAST = RADIO_REQ_UPDATE_SIM_PHONEBOOK_RECORDS
 #undef RADIO_REQ_
 #undef RADIO_REQ__
 } RADIO_REQ;
@@ -2659,7 +2732,10 @@ typedef enum radio_resp {
     RADIO_RESP_GET_DATA_CALL_LIST_1_5 = 166,
     RADIO_RESP_GET_CELL_INFO_LIST_1_5 = 174,
     RADIO_RESP_GET_ICC_CARD_STATUS_1_5 = 178,
-    RADIO_1_5_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_5
+    RADIO_1_5_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_5,
+    RADIO_CALL_1_6(RADIO_RESP__)
+    RADIO_RESP_GET_ICC_CARD_STATUS_1_6 = 208,
+    RADIO_1_6_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_6
 #undef RADIO_RESP_
 #undef RADIO_RESP__
 } RADIO_RESP;
@@ -2707,7 +2783,9 @@ typedef enum radio_ind {
 
     /* android.hardware.radio@1.5::IRadioIndication */
     RADIO_EVENT_1_5(RADIO_IND_)
-    RADIO_1_5_IND_LAST = RADIO_IND_DATA_CALL_LIST_CHANGED_1_5 /* Since 1.5.0 */
+    RADIO_1_5_IND_LAST = RADIO_IND_DATA_CALL_LIST_CHANGED_1_5, /* Since 1.5.0 */
+            RADIO_EVENT_1_6(RADIO_IND_)
+            RADIO_1_6_IND_LAST = RADIO_IND_SIM_PHONEBOOK_RECORDS_RECIEVED
 #undef RADIO_IND_
 } RADIO_IND;
 G_STATIC_ASSERT(sizeof(RADIO_IND) == 4);
