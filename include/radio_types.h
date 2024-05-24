@@ -306,7 +306,11 @@ typedef enum radio_cell_info_type_1_5 {
     RADIO_CELL_INFO_1_5_NR,
     RADIO_CELL_INFO_1_5_CDMA
 } RADIO_CELL_INFO_TYPE_1_5; /* Since 1.5.0 */
-
+/* Cast guint8 RadioCellInfo_1_5.cellInfoType to this. */
+typedef enum radio_cell_info_type_1_6 {
+    RADIO_CELL_INFO_1_6_LTE,
+    RADIO_CELL_INFO_1_6_NR,
+} RADIO_CELL_INFO_TYPE_1_6; /* Since 1.5.0 */
 /* Cast guint8 RadioCellIdentity_1_5.cellIdentityType to this. */
 typedef enum radio_cell_identity_type_1_5 {
     RADIO_CELL_IDENTITY_1_5_NONE = 0,
