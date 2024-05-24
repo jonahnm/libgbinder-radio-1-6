@@ -69,7 +69,7 @@ radio_req_name(
     RADIO_CALL_1_3(RADIO_REQ_)
     RADIO_CALL_1_4_(RADIO_REQ__)
     RADIO_CALL_1_5_(RADIO_REQ__)
-    RADIO_CALL_1_6(RADIO__REQ__)
+    RADIO_CALL_1_6(RADIO_REQ__)
 #undef RADIO_REQ_
 #undef RADIO_REQ__
     case RADIO_REQ_START_NETWORK_SCAN_1_2:     return "startNetworkScan_1_2";
@@ -351,7 +351,7 @@ radio_req_resp2(
         case RADIO_INTERFACE_1_1:
             return RADIO_RESP_GET_VOICE_REGISTRATION_STATE;
             case RADIO_INTERFACE_1_6:
-                return RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_6;s
+                return RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_6;
         default: /* The last one */
             return RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_2;
         case RADIO_INTERFACE_NONE:
