@@ -86,7 +86,6 @@ enum radio_client_signal {
 #define SIGNAL_CONNECTED_NAME  "radio-client-connected"
 
 static guint radio_client_signals[SIGNAL_COUNT] = { 0 };
-radio_client_interface
 /*==========================================================================*
  * Implementation
  *==========================================================================*/
