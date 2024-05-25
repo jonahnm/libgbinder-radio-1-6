@@ -86,7 +86,7 @@ enum radio_client_signal {
 #define SIGNAL_CONNECTED_NAME  "radio-client-connected"
 
 static guint radio_client_signals[SIGNAL_COUNT] = { 0 };
-
+radio_client_interface
 /*==========================================================================*
  * Implementation
  *==========================================================================*/
@@ -278,7 +278,8 @@ RADIO_INTERFACE
 radio_client_interface(
     RadioClient* self)
 {
-    return G_LIKELY(self) ? self->instance->version : RADIO_INTERFACE_NONE;
+   // return G_LIKELY(self) ? self->instance->version : RADIO_INTERFACE_NONE;
+   return RADIO_INTERFACE_1_6;
 }
 
 void
