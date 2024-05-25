@@ -1919,7 +1919,11 @@ typedef struct radio_reg_eutran_registration_info {
     RadioDataRegNrIndicators nrIndicators RADIO_ALIGNED(1);
 } RADIO_ALIGNED(1) RadioRegEutranRegistrationInfo; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioRegEutranRegistrationInfo) == 5);
-
+typedef struct radio_reg_nr_vops_info {
+    guint8 vopsSupported RADIO_ALIGNED(1);
+    guint8 emcSupported RADIO_ALIGNED(1);
+    guint8 emfSupported RADIO_ALIGNED(1);
+} RADIO_ALIGNED(1) RadioRegNrVopsInfo;
 typedef struct radio_reg_state_result_1_5 {
     RADIO_REG_STATE regState RADIO_ALIGNED(4);
     RADIO_TECH rat RADIO_ALIGNED(4);
@@ -1933,7 +1937,20 @@ typedef struct radio_reg_state_result_1_5 {
     } accessTechnologySpecificInfo RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioRegStateResult_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioRegStateResult_1_5) == 224);
-
+typedef struct radio_reg_state_result_1_6 {
+    RADIO_REG_STATE regState RADIO_ALIGNED(4);
+    RADIO_TECH rat RADIO_ALIGNED(4);
+    guint32 reasonDataDenied RADIO_ALIGNED(4);
+    RadioCellIdentity_1_5 cellIdentity RADIO_ALIGNED(8);
+    GBinderHidlString registeredPlmn RADIO_ALIGNED(8);
+    guint8 accessTechnologySpecificInfoType RADIO_ALIGNED(1);
+    union {
+        RadioRegCdma2000RegistrationInfo cdmaInfo RADIO_ALIGNED(4);
+        RadioRegEutranRegistrationInfo eutranInfo RADIO_ALIGNED(1);
+        RadioRegNrVopsInfo ngranNrVopsInfo RADIO_ALIGNED(1);
+        gboolean geranDtmSupported RADIO_ALIGNED(1);
+    } accessTechnologySpecificInfo RADIO_ALIGNED(4);
+} RADIO_ALIGNED(8) RadioRegStateResult_1_6;
 typedef struct radio_signal_strength_gsm {
     guint32 signalStrength RADIO_ALIGNED(4);
     guint32 bitErrorRate RADIO_ALIGNED(4);
