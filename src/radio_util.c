@@ -129,8 +129,6 @@ radio_resp_name(
         return "getCellInfoListResponse_1_5";
     case RADIO_RESP_GET_ICC_CARD_STATUS_1_5:
         return "getIccCardStatus_1_5";
-        case RADIO_RESP_GET_ICC_CARD_STATUS_1_6:
-            return "getIccCardStatus_1_6";
     case RADIO_RESP_ANY:
         break;
     }
@@ -264,8 +262,6 @@ radio_req_resp2(
             return RADIO_RESP_GET_ICC_CARD_STATUS_1_4;
         case RADIO_INTERFACE_1_5:
             return RADIO_RESP_GET_ICC_CARD_STATUS_1_5;
-            case RADIO_INTERFACE_1_6:
-                return RADIO_RESP_GET_ICC_CARD_STATUS_1_6;
         case RADIO_INTERFACE_NONE:
         case RADIO_INTERFACE_COUNT:
             break;

@@ -1566,7 +1566,26 @@ typedef struct radio_data_call_1_5 {
     gint32 mtuV6 RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioDataCall_1_5; /* Since 1.5.0 */
 G_STATIC_ASSERT(sizeof(RadioDataCall_1_5) == 112);
-typedef struct radio_data_call_1_5 RadioDataCall_1_6;
+typedef struct radio_data_call_1_6 {
+    RADIO_DATA_CALL_FAIL_CAUSE cause RADIO_ALIGNED(4);
+    gint64 suggestedRetryTime RADIO_ALIGNED(8);
+    gint32 cid RADIO_ALIGNED(4);
+    RADIO_DATA_CALL_ACTIVE_STATUS active RADIO_ALIGNED(4);
+    RADIO_PDP_PROTOCOL_TYPE type RADIO_ALIGNED(4);
+    GBinderHidlString ifname RADIO_ALIGNED(8);
+    GBinderHidlVec addresses RADIO_ALIGNED(8);
+    GBinderHidlVec dnses RADIO_ALIGNED(8);
+    GBinderHidlVec gateways RADIO_ALIGNED(8);
+    GBinderHidlVec pcscf RADIO_ALIGNED(8);
+    gint32 mtuV4 RADIO_ALIGNED(4);
+    gint32 mtuV6 RADIO_ALIGNED(4);
+    gint64 defaultQos RADIO_ALIGNED(8); // didn't feel like defining.
+    GBinderHidlVec qosSessions RADIO_ALIGNED(8);
+    gint8 handoverFailureMode RADIO_ALIGNED(1);
+    gint32 pduSessionId RADIO_ALIGNED(4);
+    gint64 sliceInfo RADIO_ALIGNED(8); //didn't feel like defining.
+    GBinderHidlVec trafficDescriptors RADIO_ALIGNED(8);
+} RADIO_ALIGNED(8) RadioDataCall_1_6;
 typedef struct radio_sms_write_args {
     gint32 status RADIO_ALIGNED(4);
     GBinderHidlString pdu RADIO_ALIGNED(8);
@@ -2788,8 +2807,7 @@ typedef enum radio_resp {
     RADIO_RESP_GET_ICC_CARD_STATUS_1_5 = 178,
     RADIO_1_5_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_5,
     RADIO_CALL_1_6(RADIO_RESP__)
-    RADIO_RESP_GET_ICC_CARD_STATUS_1_6 = 208,
-    RADIO_1_6_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_6
+    RADIO_1_6_RESP_LAST = RADIO_RESP_UPDATE_SIM_PHONEBOOK_RECORDS
 #undef RADIO_RESP_
 #undef RADIO_RESP__
 } RADIO_RESP;
