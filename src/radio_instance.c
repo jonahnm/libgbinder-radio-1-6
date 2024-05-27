@@ -584,7 +584,7 @@ radio_instance_create(
                 if (obj) {
                     GINFO("Connected to %s", fqname);
                     self = radio_instance_create_version(sm, obj, dev, slot,
-                        key, modem, slot_indmax_versionex, desc);
+                        key, modem, slot_index, desc);
                 }
                 g_free(fqname);
             }
