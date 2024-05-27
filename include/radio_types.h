@@ -2258,7 +2258,7 @@ typedef struct radio_physical_channel_config_1_6 {
     gint32 uplinkChannelNumber RADIO_ALIGNED(4);
     gint32 cellBandwidthDownlinkKhz RADIO_ALIGNED(4);
     gint32 cellBandwidthUplinkKhz RADIO_ALIGNED(4);
-    GBinderHidlVec contextIds RADIO_ALIGNED(4);
+    GBinderHidlVec contextIds RADIO_ALIGNED(8);
     guint32 physicalCellId RADIO_ALIGNED(4);
     guint8 bandType RADIO_ALIGNED(1);
     union {
@@ -2267,7 +2267,7 @@ typedef struct radio_physical_channel_config_1_6 {
         RADIO_EUTRAN_BAND eutranBand RADIO_ALIGNED(4);
         RADIO_NGRAN_BAND ngranBand RADIO_ALIGNED(4);
     } band RADIO_ALIGNED(4);
-};
+} RADIO_ALIGNED(8) RadioPhysicalChannelConfig_1_6;
 typedef struct radio_gsm_broadcast_sms_config {
     gint32 fromServiceId RADIO_ALIGNED(4);
     gint32 toServiceId RADIO_ALIGNED(4);
