@@ -576,7 +576,7 @@ radio_instance_create(
         for (i = 0; i < G_N_ELEMENTS(radio_interfaces) && !self; i++) {
             const RadioInterfaceDesc* desc = radio_interfaces + i;
 
-            if (desc->version <= max_version) {
+            if (desc->version == max_version) {
                 char* fqname = g_strconcat(desc->radio_iface, "/", slot, NULL);
                 GBinderRemoteObject* obj = /* autoreleased */
                     gbinder_servicemanager_get_service_sync(sm, fqname, NULL);
