@@ -182,6 +182,11 @@ typedef enum radio_error {
     RADIO_ERROR_DEVICE_IN_USE = 64,
     RADIO_ERROR_ABORTED = 65,
     RADIO_ERROR_INVALID_RESPONSE = 66,
+    RADIO_ERROR_SIMULTANEOUS_SMS_AND_CALL_NOT_ALLOWED = 67, // since IRadio@1.6
+    RADIO_ERROR_ACCESS_BARRED = 68, // since IRadio@1.6
+    RADIO_ERROR_BLOCKED_DUE_TO_CALL = 69, // since IRadio@1.6
+    RADIO_ERROR_RF_HARDWARE_ISSUE = 70, // since IRadio@1.6
+    RADIO_ERROR_NO_RF_CALIBRATION_INFO = 71, // since IRadio@1.6
     RADIO_ERROR_OEM_ERROR_1 = 501,
     RADIO_ERROR_OEM_ERROR_2 = 502,
     RADIO_ERROR_OEM_ERROR_3 = 503,
@@ -209,7 +214,6 @@ typedef enum radio_error {
     RADIO_ERROR_OEM_ERROR_25 = 525
 } RADIO_ERROR; /* Since 1.4.3 */
 G_STATIC_ASSERT(sizeof(RADIO_ERROR) == 4);
-
 typedef enum radio_state {
     RADIO_STATE_OFF = 0,
     RADIO_STATE_UNAVAILABLE = 1,
@@ -842,6 +846,7 @@ typedef enum radio_ngran_band {
     RADIO_NGRAN_BAND_18 = 18,
     RADIO_NGRAN_BAND_20 = 20,
     RADIO_NGRAN_BAND_25 = 25,
+    RADIO_NGRAN_BAND_26 = 26, // since IRadio@1.6
     RADIO_NGRAN_BAND_28 = 28,
     RADIO_NGRAN_BAND_29 = 29,
     RADIO_NGRAN_BAND_30 = 30,
@@ -850,9 +855,11 @@ typedef enum radio_ngran_band {
     RADIO_NGRAN_BAND_39 = 39,
     RADIO_NGRAN_BAND_40 = 40,
     RADIO_NGRAN_BAND_41 = 41,
+    RADIO_NGRAN_BAND_46 = 46, // since IRadio@1.6
     RADIO_NGRAN_BAND_48 = 48,
     RADIO_NGRAN_BAND_50 = 50,
     RADIO_NGRAN_BAND_51 = 51,
+    RADIO_NGRAN_BAND_53 = 53, // since IRadio@1.6
     RADIO_NGRAN_BAND_65 = 65,
     RADIO_NGRAN_BAND_66 = 66,
     RADIO_NGRAN_BAND_70 = 70,
@@ -876,6 +883,7 @@ typedef enum radio_ngran_band {
     RADIO_NGRAN_BAND_93 = 93,
     RADIO_NGRAN_BAND_94 = 94,
     RADIO_NGRAN_BAND_95 = 95,
+    RADIO_NGRAN_BAND_96 = 96, // since IRadio@1.6
     RADIO_NGRAN_BAND_257 = 257,
     RADIO_NGRAN_BAND_258 = 258,
     RADIO_NGRAN_BAND_260 = 260,
@@ -1300,6 +1308,9 @@ typedef enum radio_data_call_fail_cause {
     RADIO_DATA_CALL_FAIL_VSNCP_RECONNECT_NOT_ALLOWED = 0x8C9,
     RADIO_DATA_CALL_FAIL_IPV6_PREFIX_UNAVAILABLE = 0x8CA,
     RADIO_DATA_CALL_FAIL_HANDOFF_PREFERENCE_CHANGED = 0x8CB,
+    RADIO_DATA_CALL_FAIL_SLICE_REJECTED = 0x8CC,
+    RADIO_DATA_CALL_FAIL_MATCH_ALL_RULE_NOT_ALLOWED = 0x8CD,
+    RADIO_DATA_CALL_FAIL_ALL_MATCHING_RULES_FAILED = 0x8CE,
     RADIO_DATA_CALL_FAIL_OEM_DCFAILCAUSE_1 = 0x1001,
     RADIO_DATA_CALL_FAIL_OEM_DCFAILCAUSE_2 = 0x1002,
     RADIO_DATA_CALL_FAIL_OEM_DCFAILCAUSE_3 = 0x1003,
@@ -1331,7 +1342,6 @@ typedef struct radio_response_info {
     RADIO_ERROR error RADIO_ALIGNED(4);
 } RadioResponseInfo;
 G_STATIC_ASSERT(sizeof(RadioResponseInfo) == 12);
-
 typedef struct radio_card_status {
     RADIO_CARD_STATE cardState RADIO_ALIGNED(4);
     RADIO_PIN_STATE universalPinState RADIO_ALIGNED(4);
@@ -1412,7 +1422,10 @@ typedef struct radio_call_1_2 {
     gint32 audioQuality RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioCall_1_2; /* Since 1.2.3 */
 G_STATIC_ASSERT(sizeof(RadioCall_1_2) == 96);
-
+typedef struct radio_call_1_6 {
+    RadioCall_1_2 base RADIO_ALIGNED(8);
+    GBinderHidlString forwardedNumber RADIO_ALIGNED(8);
+} RADIO_ALIGNED(8) RadioCall_1_6;
 typedef struct radio_dial {
     GBinderHidlString address RADIO_ALIGNED(8);
     RADIO_CLIR clir RADIO_ALIGNED(4);
@@ -2238,7 +2251,23 @@ typedef struct radio_physical_channel_config_1_4 {
     guint32 physicalCellId RADIO_ALIGNED(4);
 } RADIO_ALIGNED(8) RadioPhysicalChannelConfig_1_4; /* Since 1.5.4 */
 G_STATIC_ASSERT(sizeof(RadioPhysicalChannelConfig_1_4) == 48);
-
+typedef struct radio_physical_channel_config_1_6 {
+    RADIO_CELL_CONNECTION_STATUS status RADIO_ALIGNED(4);
+    RADIO_TECH rat RADIO_ALIGNED(4);
+    gint32 downlinkChannelNumber RADIO_ALIGNED(4);
+    gint32 uplinkChannelNumber RADIO_ALIGNED(4);
+    gint32 cellBandwidthDownlinkKhz RADIO_ALIGNED(4);
+    gint32 cellBandwidthUplinkKhz RADIO_ALIGNED(4);
+    GBinderHidlVec contextIds RADIO_ALIGNED(4);
+    guint32 physicalCellId RADIO_ALIGNED(4);
+    guint8 bandType RADIO_ALIGNED(1);
+    union {
+        RADIO_GERAN_BAND geranBand RADIO_ALIGNED(4);
+        RADIO_UTRAN_BAND utranBand RADIO_ALIGNED(4);
+        RADIO_EUTRAN_BAND eutranBand RADIO_ALIGNED(4);
+        RADIO_NGRAN_BAND ngranBand RADIO_ALIGNED(4);
+    } band RADIO_ALIGNED(4);
+};
 typedef struct radio_gsm_broadcast_sms_config {
     gint32 fromServiceId RADIO_ALIGNED(4);
     gint32 toServiceId RADIO_ALIGNED(4);
