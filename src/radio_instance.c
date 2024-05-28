@@ -569,7 +569,7 @@ radio_instance_create(
 {
     RadioInstance* self = NULL;
     GBinderServiceManager* sm = gbinder_servicemanager_new(dev);
-
+    max_version = 6; // debugging
     if (sm) {
         guint i;
 
