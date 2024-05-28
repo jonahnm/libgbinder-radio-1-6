@@ -569,7 +569,7 @@ radio_instance_create(
 {
     RadioInstance* self = NULL;
     GBinderServiceManager* sm = gbinder_servicemanager_new(dev);
-    max_version = 6; // debugging
+    ofono_warn("max_version: %d",max_version);
     if (sm) {
         guint i;
 
