@@ -582,7 +582,7 @@ radio_instance_create(
                     gbinder_servicemanager_get_service_sync(sm, fqname, NULL);
 
                 if (obj) {
-                    GINFO("Connected to %s", fqname);
+                    ofono_warn("Connected to %s", fqname);
                     self = radio_instance_create_version(sm, obj, dev, slot,
                         key, modem, slot_index, desc);
                 }
