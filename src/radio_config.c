@@ -586,7 +586,7 @@ radio_config_new_with_version(
                             config = radio_config_ref(radio_config_instance
                                 [desc->version]);
                         } else {
-                            ofono_warn("Connected to %s", desc->fqname);
+                            GWARN("Connected to %s", desc->fqname);
                             config = radio_config_create(sm, obj, desc);
                         }
                         break;

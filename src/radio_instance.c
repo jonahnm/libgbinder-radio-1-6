@@ -569,7 +569,7 @@ radio_instance_create(
 {
     RadioInstance* self = NULL;
     GBinderServiceManager* sm = gbinder_servicemanager_new(dev);
-    ofono_warn("max_version: %d",max_version);
+    GWARN("max_version: %d",max_version);
     if (sm) {
         guint i;
 
@@ -582,7 +582,7 @@ radio_instance_create(
                     gbinder_servicemanager_get_service_sync(sm, fqname, NULL);
 
                 if (obj) {
-                    ofono_warn("Connected to %s", fqname);
+                    GWARN("Connected to %s", fqname);
                     self = radio_instance_create_version(sm, obj, dev, slot,
                         key, modem, slot_index, desc);
                 }

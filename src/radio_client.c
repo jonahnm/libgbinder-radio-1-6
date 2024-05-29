@@ -278,7 +278,7 @@ radio_client_interface(
     RadioClient* self)
 {
    // return G_LIKELY(self) ? self->instance->version : RADIO_INTERFACE_NONE;
-   ofono_warn("Call to radio_client_interface.");
+   GWARN("Call to radio_client_interface.");
    return RADIO_INTERFACE_1_6;
 }
 
