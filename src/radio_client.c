@@ -277,9 +277,8 @@ RADIO_INTERFACE
 radio_client_interface(
     RadioClient* self)
 {
-   // return G_LIKELY(self) ? self->instance->version : RADIO_INTERFACE_NONE;
-   GWARN("Call to radio_client_interface.");
-   return RADIO_INTERFACE_1_6;
+    GWARN("Call to radio_client_interface.");
+   return G_LIKELY(self) ? self->instance->version : RADIO_INTERFACE_NONE;
 }
 
 void
