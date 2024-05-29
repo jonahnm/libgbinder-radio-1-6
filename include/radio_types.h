@@ -2606,35 +2606,35 @@ G_STATIC_ASSERT(sizeof(RadioNetworkScanRequest_1_5) == 56);
     c(171,176,sendCdmaSmsExpectMore,SEND_CDMA_SMS_EXPECT_MORE,) \
     c(172,177,supplySimDepersonalization,SUPPLY_SIM_PERSONALIZATION,)
 #define RADIO_CALL_1_6(c) \
-    c(173,178,setRadioPower,SET_RADIO_POWER,_1_6) \
-    c(174,179,getDataCallList,GET_DATA_CALL_LIST,_1_6) \
-    c(175,180,setupDataCall,SETUP_DATA_CALL,_1_6) \
-    c(176,181,sendSms,SEND_SMS,_1_6) \
-    c(177,182,sendSmsExpectMore,SEND_SMS_EXPECT_MORE,_1_6) \
-    c(178,183,sendCdmaSms,SEND_CDMA_SMS,_1_6) \
-    c(179,184,sendCdmaSmsExpectMore,SEND_CDMA_SMS_EXPECT_MORE,_1_6) \
-    c(180,185,setSimCardPower,SET_SIM_CARD_POWER,_1_6) \
-    c(181,186,setNrDualConnectivityState,SET_NR_DUAL_CONNECTIVITY_STATE,) \
-    c(182,187,isNrDualConnectivityEnabled,IS_NR_DUAL_CONNECTIVITY_ENABLED,) \
-    c(183,188,allocatePduSessionId,ALLOCATE_PDU_SESSION_ID,) \
-    c(184,189,releasePduSessionId,RELEASE_PDU_SESSION_ID,) \
-    c(185,190,startHandover,START_HANDOVER,) \
-    c(186,191,cancelHandover,CANCEL_HANDOVER,) \
-    c(187,192,setAllowedNetworkTypesBitmap,SET_ALLOWED_NETWORK_TYPES_BITMAP,) \
-    c(188,193,getAllowedNetworkTypesBitmap,GET_ALLOWED_NETWORK_TYPES_BITMAP,) \
-    c(189,194,setDataThrottling,SET_DATA_THROTTLING,) \
-    c(190,195,emergencyDial,EMERGENCY_DIAL,_1_6) \
-    c(191,196,getSystemSelectionChannels,GET_SYSTEM_SELECTION_CHANNELS,) \
-    c(192,197,getCellInfoList,GET_CELL_INFO_LIST,_1_6) \
-    c(193,198,getVoiceRegistrationState,GET_VOICE_REGISTRATION_STATE,_1_6) \
-    c(194,199,getSignalStrength,GET_SIGNAL_STRENGTH,_1_6) \
-    c(195,200,getDataRegistrationState,GET_DATA_REGISTRATION_STATE,_1_6) \
-    c(196,201,getCurrentCalls,GET_CURRENT_CALLS,_1_6) \
-    c(197,202,getSlicingConfig,GET_SLICING_CONFIG,) \
-    c(198,203,setCarrierInfoForImsiEncryption,SET_CARRIER_INFO_FOR_IMSI_ENCRYPTION,_1_6) \
-    c(199,204,getSimPhonebookRecords,GET_SIM_PHONEBOOK_RECORDS,) \
-    c(200,205,getSimPhonebookCapacity,GET_SIM_PHONEBOOK_CAPACITY,) \
-    c(201,206,updateSimPhonebookRecords,UPDATE_SIM_PHONEBOOK_RECORDS,)
+    c(173,179,setRadioPower,SET_RADIO_POWER,_1_6) \
+    c(174,180,getDataCallList,GET_DATA_CALL_LIST,_1_6) \
+    c(175,181,setupDataCall,SETUP_DATA_CALL,_1_6) \
+    c(176,182,sendSms,SEND_SMS,_1_6) \
+    c(177,183,sendSmsExpectMore,SEND_SMS_EXPECT_MORE,_1_6) \
+    c(178,184,sendCdmaSms,SEND_CDMA_SMS,_1_6) \
+    c(179,185,sendCdmaSmsExpectMore,SEND_CDMA_SMS_EXPECT_MORE,_1_6) \
+    c(180,186,setSimCardPower,SET_SIM_CARD_POWER,_1_6) \
+    c(181,187,setNrDualConnectivityState,SET_NR_DUAL_CONNECTIVITY_STATE,) \
+    c(182,188,isNrDualConnectivityEnabled,IS_NR_DUAL_CONNECTIVITY_ENABLED,) \
+    c(183,189,allocatePduSessionId,ALLOCATE_PDU_SESSION_ID,) \
+    c(184,190,releasePduSessionId,RELEASE_PDU_SESSION_ID,) \
+    c(185,191,startHandover,START_HANDOVER,) \
+    c(186,192,cancelHandover,CANCEL_HANDOVER,) \
+    c(187,193,setAllowedNetworkTypesBitmap,SET_ALLOWED_NETWORK_TYPES_BITMAP,) \
+    c(188,194,getAllowedNetworkTypesBitmap,GET_ALLOWED_NETWORK_TYPES_BITMAP,) \
+    c(189,195,setDataThrottling,SET_DATA_THROTTLING,) \
+    c(190,196,emergencyDial,EMERGENCY_DIAL,_1_6) \
+    c(191,197,getSystemSelectionChannels,GET_SYSTEM_SELECTION_CHANNELS,) \
+    c(192,198,getCellInfoList,GET_CELL_INFO_LIST,_1_6) \
+    c(193,199,getVoiceRegistrationState,GET_VOICE_REGISTRATION_STATE,_1_6) \
+    c(194,201,getSignalStrength,GET_SIGNAL_STRENGTH,_1_6) \
+    c(195,202,getDataRegistrationState,GET_DATA_REGISTRATION_STATE,_1_6) \
+    c(196,203,getCurrentCalls,GET_CURRENT_CALLS,_1_6) \
+    c(197,204,getSlicingConfig,GET_SLICING_CONFIG,) \
+    c(198,205,setCarrierInfoForImsiEncryption,SET_CARRIER_INFO_FOR_IMSI_ENCRYPTION,_1_6) \
+    c(199,206,getSimPhonebookRecords,GET_SIM_PHONEBOOK_RECORDS,) \
+    c(200,207,getSimPhonebookCapacity,GET_SIM_PHONEBOOK_CAPACITY,) \
+    c(201,208,updateSimPhonebookRecords,UPDATE_SIM_PHONEBOOK_RECORDS,)
 #define RADIO_EVENT_1_0(e) \
     e(1,radioStateChanged,RADIO_STATE_CHANGED) \
     e(2,callStateChanged,CALL_STATE_CHANGED) \
@@ -2804,7 +2804,7 @@ typedef enum radio_resp {
     RADIO_CALL_1_5_(RADIO_RESP__) /* Since 1.5.0 */
     RADIO_RESP_GET_DATA_CALL_LIST_1_5 = 166,
     RADIO_RESP_GET_CELL_INFO_LIST_1_5 = 174,
-    RADIO_RESP_GET_ICC_CARD_STATUS_1_5 = 207,
+    RADIO_RESP_GET_ICC_CARD_STATUS_1_5 = 178,
     RADIO_1_5_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_5,
     RADIO_CALL_1_6(RADIO_RESP__)
     RADIO_1_6_RESP_LAST = RADIO_RESP_UPDATE_SIM_PHONEBOOK_RECORDS
