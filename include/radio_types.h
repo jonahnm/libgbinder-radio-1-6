@@ -2626,13 +2626,15 @@ G_STATIC_ASSERT(sizeof(RadioNetworkScanRequest_1_5) == 56);
     c(190,196,emergencyDial,EMERGENCY_DIAL,_1_6) \
     c(191,197,getSystemSelectionChannels,GET_SYSTEM_SELECTION_CHANNELS,) \
     c(192,198,getCellInfoList,GET_CELL_INFO_LIST,_1_6) \
-    c(193,201,getSignalStrength,GET_SIGNAL_STRENGTH,_1_6) \
-    c(194,202,getCurrentCalls,GET_CURRENT_CALLS,_1_6) \
-    c(195,203,getSlicingConfig,GET_SLICING_CONFIG,) \
-    c(196,204,setCarrierInfoForImsiEncryption,SET_CARRIER_INFO_FOR_IMSI_ENCRYPTION,_1_6) \
-    c(197,205,getSimPhonebookRecords,GET_SIM_PHONEBOOK_RECORDS,) \
-    c(198,206,getSimPhonebookCapacity,GET_SIM_PHONEBOOK_CAPACITY,) \
-    c(199,207,updateSimPhonebookRecords,UPDATE_SIM_PHONEBOOK_RECORDS,)
+    c(193,199,getVoiceRegistrationState,GET_VOICE_REGISTRATION_STATE,_1_6) \
+    c(194,200,getDataRegistrationState,GET_DATA_REGISTRATION_STATE,_1_6) \
+    c(195,201,getSignalStrength,GET_SIGNAL_STRENGTH,_1_6) \
+    c(196,202,getCurrentCalls,GET_CURRENT_CALLS,_1_6) \
+    c(197,203,getSlicingConfig,GET_SLICING_CONFIG,) \
+    c(198,204,setCarrierInfoForImsiEncryption,SET_CARRIER_INFO_FOR_IMSI_ENCRYPTION,_1_6) \
+    c(199,205,getSimPhonebookRecords,GET_SIM_PHONEBOOK_RECORDS,) \
+    c(200,206,getSimPhonebookCapacity,GET_SIM_PHONEBOOK_CAPACITY,) \
+    c(201,207,updateSimPhonebookRecords,UPDATE_SIM_PHONEBOOK_RECORDS,)
 #define RADIO_EVENT_1_0(e) \
     e(1,radioStateChanged,RADIO_STATE_CHANGED) \
     e(2,callStateChanged,CALL_STATE_CHANGED) \
@@ -2805,8 +2807,6 @@ typedef enum radio_resp {
     RADIO_RESP_GET_ICC_CARD_STATUS_1_5 = 178,
     RADIO_1_5_RESP_LAST = RADIO_RESP_GET_ICC_CARD_STATUS_1_5,
     RADIO_CALL_1_6(RADIO_RESP__)
-    RADIO_RESP_GET_VOICE_REGISTRATION_STATE_1_6 = 199,
-    RADIO_RESP_GET_DATA_REGISTRATION_STATE_1_6 = 200,
     RADIO_1_6_RESP_LAST = RADIO_RESP_UPDATE_SIM_PHONEBOOK_RECORDS
 #undef RADIO_RESP_
 #undef RADIO_RESP__
